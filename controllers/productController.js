@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors/custom-error");
 const Product = require("../models/Product");
+const productsJson = require("../product.json");
 // const productsJson = require("../mockData/products.json");
 const cloud = require("cloudinary").v2;
 const { unlinkSync } = require("fs");
@@ -21,7 +22,8 @@ const getSingleProduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   req.body.user = req.user.userId;
-  const product = await Product.create(req.body);
+  // const product = await Product.create(req.body);
+  const product = await Product.create(productsJson);
   res.status(StatusCodes.CREATED).json({ product });
 };
 const updateProduct = async (req, res) => {
