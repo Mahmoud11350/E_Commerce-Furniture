@@ -6,11 +6,11 @@ const Product = require("../models/Product");
 const cloud = require("cloudinary").v2;
 const { unlinkSync } = require("fs");
 const getAllProducts = async (req, res) => {
-  const products = await Product.find({}).populate("reviews");
+  const products = await Product.find({});
   res.status(StatusCodes.OK).json({ products });
 };
 const getSingleProduct = async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate("reviews");
   if (!product) {
     throw new CustomError(
       `No Product with Id ${req.params.id}`,
