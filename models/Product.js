@@ -40,7 +40,7 @@ const productSchema = new Schema(
       required: [true, "please provide product category "],
       trim: true,
       enum: {
-        values: ["office", "kitchen", "bedroom", "living room"],
+        values: ["office", "kitchen", "bedroom", "living room", "dining"],
         message: "please provide valid category ",
       },
     },
