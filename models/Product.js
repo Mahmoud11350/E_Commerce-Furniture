@@ -31,7 +31,7 @@ const productSchema = new Schema(
       required: [true, "please provide company "],
       trim: true,
       enum: {
-        values: ["liddy", "ikea", "marcos"],
+        values: ["liddy", "ikea", "marcos", "caressa", "kids"],
         message: "please provide valid company ",
       },
     },

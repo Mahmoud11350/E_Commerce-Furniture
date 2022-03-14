@@ -22,8 +22,8 @@ const getSingleProduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   req.body.user = req.user.userId;
-  // const product = await Product.create(req.body);
-  const product = await Product.create(productsJson);
+  const product = await Product.create(req.body);
+  // const product = await Product.create(productsJson);
   res.status(StatusCodes.CREATED).json({ product });
 };
 const updateProduct = async (req, res) => {
