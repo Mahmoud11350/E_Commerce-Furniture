@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors/custom-error");
 const Product = require("../models/Product");
-const productsJson = require("../product.json");
+// const productsJson = require("../product.json");
 // const productsJson = require("../mockData/products.json");
 const cloud = require("cloudinary").v2;
 const { unlinkSync } = require("fs");
