@@ -11,6 +11,7 @@ const cookiesResponse = ({ res, userToken }) => {
     secure: false,
     signed: true,
   });
+  return token;
 };
 
 module.exports = cookiesResponse;

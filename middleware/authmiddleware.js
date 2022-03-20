@@ -1,10 +1,13 @@
+require("dotenv").config();
 const { StatusCodes } = require("http-status-codes");
 const { verify } = require("jsonwebtoken");
 const CustomError = require("../errors/custom-error");
 const authMiddleware = (req, res, next) => {
-  const token = req.signedCookies.token;
+  const token = req.header("Authorization").replace("Bearer ", "");
+  // const cookieTken = req.signedCookies.token;
   try {
     const user = verify(token, process.env.TOKEN_SECRET);
+    console.log("user");
     if (!user) {
       throw new CustomError("Un authenticated", StatusCodes.UNAUTHORIZED);
     }

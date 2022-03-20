@@ -6,18 +6,19 @@ const register = async (req, res) => {
   const role = isFirstAccount === true ? "admin" : "user";
   const user = await User.create({ ...req.body, role });
   const userToken = { name: user.name, userId: user._id, role: user.role };
-  cookiesResponse({ res, userToken });
-  res.status(StatusCodes.CREATED).json({ user });
+  const token = cookiesResponse({ res, userToken });
+  res.status(StatusCodes.CREATED).json({ user, token });
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findByCredintial({ email, password });
+  let token = null;
   if (user) {
     const userToken = { name: user.name, userId: user._id, role: user.role };
-    cookiesResponse({ res, userToken });
+    token = cookiesResponse({ res, userToken });
   }
-  res.status(StatusCodes.OK).json({ user });
+  res.status(StatusCodes.OK).json({ user, token });
 };
 
 const logout = async (req, res) => {
