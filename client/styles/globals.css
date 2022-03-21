@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&family=Sofia&family=Work+Sans:ital,wght@0,300;0,400;1,500;1,600;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&family=Work+Sans:ital,wght@0,300;0,400;1,500;1,600;1,700&display=swap'); */
+body {
+  font-family: 'Cairo', sans-serif;
+  font-family: 'Sofia', cursive;
+  font-family: 'Work Sans', sans-serif;
+}
+
+:root {
+  --main: #009688;
+}
