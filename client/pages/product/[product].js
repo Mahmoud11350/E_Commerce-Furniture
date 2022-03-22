@@ -146,22 +146,22 @@ function Product({ product }) {
 
 export default Product
 
-export async function getStaticPaths() {
-  const { data } = await axios.get('/products')
+// export async function getStaticPaths() {
+//   const { data } = await axios.get('/products')
 
-  const paths = data.products.map((product) => {
-    return {
-      params: { product: product._id.toString() },
-    }
-  })
+//   const paths = data.products.map((product) => {
+//     return {
+//       params: { product: product._id.toString() },
+//     }
+//   })
 
-  return {
-    paths,
-    fallback: false,
-  }
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const productId = params.product
   const { data: product } = await axios.get(`/products/${productId}`)
 
