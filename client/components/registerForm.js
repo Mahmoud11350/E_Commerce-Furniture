@@ -1,4 +1,3 @@
-import { response } from 'express'
 import { Formik, Form, Field } from 'formik'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -32,6 +31,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
     }
     resetForm()
   }
+
   return (
     <section className=" mx-auto w-96 rounded-xl border-t-8 border-mainDark">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -54,6 +54,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
               </div>
             )
           })}
+
           <div className="mx-auto text-center ">
             <button
               className="rounded bg-mainDark py-2 px-4 text-xl font-bold capitalize text-white transition-colors duration-300 hover:bg-main"
