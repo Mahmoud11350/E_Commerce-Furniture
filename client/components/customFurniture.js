@@ -1,6 +1,6 @@
 function CustomFurniture() {
   return (
-    <section className="bg-mainLight py-12 ">
+    <section className="bg-mainLight/30 py-12 ">
       <div className="container">
         <div className="mb-6 flex flex-col items-center justify-between md:flex-row">
           <h3 className="text-2xl md:w-1/2">

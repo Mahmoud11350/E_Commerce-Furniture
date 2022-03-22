@@ -8,15 +8,7 @@ function productsSidebar() {
   const [activeClass, setActiveClass] = useState('all')
   const dispatch = useDispatch()
   const products = useSelector((state) => state.product.products)
-  const category = [
-    'all',
-    'office',
-    'living room',
-    'kitchen',
-    'bedroom',
-    'dinnig',
-    'kids',
-  ]
+  const category = ['all', 'office', 'kitchen', 'bedroom']
   const company = ['all', 'liddy', 'marcos', 'ikea', 'caressa']
   const colors = ['#ffb900', '#ff0000', '#00ff00', '#0000ff', '#000']
   const handleSubmit = (values) => {
@@ -47,9 +39,9 @@ function productsSidebar() {
                         <option
                           value={item}
                           key={item}
-                          className=" bg-mainLight "
+                          className="bg-mainLight"
                         >
-                          {item}{' '}
+                          {item}
                         </option>
                       )
                     })}
@@ -66,8 +58,10 @@ function productsSidebar() {
                         />
                         <label
                           htmlFor={item}
-                          className={`mb-2 hidden cursor-pointer rounded  border border-main py-1 px-2 text-center capitalize hover:bg-main hover:text-white md:block md:w-5/6 ${
-                            activeClass === item ? 'bg-main text-white' : ''
+                          className={`mb-2 hidden h-fit cursor-pointer  rounded border border-main py-1 px-2 text-center capitalize hover:bg-secondary hover:text-white md:block md:w-5/6 ${
+                            activeClass === item
+                              ? 'bg-secondary text-white'
+                              : ''
                           }`}
                           onClick={() => setActiveClass(item)}
                         >

@@ -1,14 +1,19 @@
 import { useRouter } from 'next/router'
 import Register from '../components/registerForm'
-import WithAuth from '../components/WithAuth'
 import { useEffect } from 'react'
 function RegisterForm() {
   const Router = useRouter()
+  const { token, user } = useSelector((state) => {
+    return {
+      token: state.product.token,
+      user: state.product.user,
+    }
+  })
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (token && user) {
       Router.replace('/')
     }
-  }, [])
+  }, [token, user])
   return (
     <>
       <Register
@@ -20,4 +25,4 @@ function RegisterForm() {
   )
 }
 
-export default WithAuth(RegisterForm)
+export default RegisterForm

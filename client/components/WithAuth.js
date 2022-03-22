@@ -10,9 +10,9 @@ const WithAuth =
     const router = useRouter()
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token')
-      const user = await api.post('/user/verify', token)
-      if (token) {
-        dispatch(getToken(token))
+      const user = localStorage.getItem('user')
+      if (token && user) {
+        dispatch(getAuthInfo({ token, user }))
         return <Component {...props} />
       }
       router.replace('/login')

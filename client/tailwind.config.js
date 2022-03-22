@@ -6,9 +6,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        main: '#009688',
-        mainDark: '#004d40',
-        mainLight: '#b2dfdb',
+        main: '#344955',
+        mainDark: '#232f34',
+        mainLight: '#4a6572',
+        secondary: '#f9aa33',
       },
       thema: {
         sofia: [

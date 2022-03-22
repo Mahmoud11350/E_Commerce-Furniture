@@ -14,7 +14,7 @@ function Subscribe() {
           <form>
             <input
               type="text"
-              className="w-3/4 rounded-l border-2 border-main py-2 px-2 text-lg outline-none"
+              className="w-3/6 rounded-l border-2 border-main py-2 px-2 text-lg outline-none "
             />
             <button className="rounded-r border-2 border-main bg-main py-2 px-2 text-lg text-white">
               Subscribe

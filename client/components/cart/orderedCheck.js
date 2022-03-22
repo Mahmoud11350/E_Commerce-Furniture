@@ -33,6 +33,9 @@ function OrderCheck({ cartItems }) {
             </h2>
           </div>
         </div>
+        <button className="rounded bg-red-600 py-2 px-4 text-lg font-bold text-white transition-colors duration-300 hover:bg-red-800">
+          Order Now
+        </button>
       </div>
     </section>
   )

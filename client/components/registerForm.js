@@ -1,19 +1,16 @@
 import { Formik, Form, Field } from 'formik'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import api from '../axios/axios'
-import { handleLogin, handleRegister, getToken } from '../store/productSlice'
+import { saveLocalStorage } from '../store/productSlice'
 function RegisterForm({ inputs, initialValues, btnType }) {
-  const token = useSelector((state) => state.product.token)
-  console.log(token)
   const dispatch = useDispatch()
   const handleSubmit = async (values, { resetForm }) => {
     if (btnType === 'login') {
       try {
         const { data } = await api.post('/auth/login', values)
-        localStorage.setItem('token', data.token)
-        dispatch(getToken(data.token))
+        const { token, user } = data
+        dispatch(saveLocalStorage({ token, user }))
       } catch (error) {
         console.log(error.response)
       }
@@ -21,8 +18,8 @@ function RegisterForm({ inputs, initialValues, btnType }) {
     if (btnType === 'register') {
       try {
         const { data } = await api.post('/auth/register', values)
-        localStorage.setItem('token', data.token)
-        dispatch(getToken(data.token))
+        const { token, user } = data
+        dispatch(saveLocalStorage({ token, user }))
       } catch (error) {
         console.log(error.response)
       }

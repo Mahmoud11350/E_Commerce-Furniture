@@ -1,15 +1,22 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import LoginForm from '../components/registerForm'
-import WithAuth from '../components/WithAuth'
 
 function Login() {
   const Router = useRouter()
+  const { token, user } = useSelector((state) => {
+    return {
+      token: state.product.token,
+      user: state.product.user,
+    }
+  })
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (token && user) {
       Router.replace('/')
     }
-  }, [])
+  }, [token, user])
   return (
     <>
       <LoginForm
@@ -21,4 +28,4 @@ function Login() {
   )
 }
 
-export default WithAuth(Login)
+export default Login

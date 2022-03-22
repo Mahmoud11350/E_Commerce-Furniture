@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+const isServer = typeof window === 'undefined'
+const token = isServer ? null : window.localStorage.getItem('token')
+const user = isServer ? null : window.localStorage.getItem('user')
 const initialState = {
   products: {
     name: '',
@@ -9,7 +12,14 @@ const initialState = {
   },
   cartItems: [],
   ui: null,
-  token: null,
+  token,
+  user,
+  review: {
+    rating: 0,
+    title: '',
+    comment: '',
+  },
+  showReviewForm: false,
 }
 
 const productSlice = createSlice({
@@ -58,18 +68,29 @@ const productSlice = createSlice({
     clearCart(state, action) {
       state.cartItems = []
     },
-    getToken(state, action) {
-      state.token = action.payload
+    getAuthInfo(state, action) {
+      state.token = action.payload.token
+      state.user = action.payload.user
     },
-    // handleLogin(state, action) {
-    //  const {data} = await api.post("/auth/login",action.payload)
-    //   console.log('LOgin')
-    //   console.log(action.payload)
-    // },
-    // handleRegister(state, action) {
-    //   console.log('register')
-    //   console.log(action.payload)
-    // },
+    saveLocalStorage(state, action) {
+      localStorage.setItem('user', JSON.stringify(action.payload.user))
+      localStorage.setItem('token', action.payload.token)
+      state.token = action.payload.token
+      state.user = action.payload.user
+    },
+    removeLocalStorage(state, action) {
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      state.token = null
+      state.user = null
+    },
+    showReviewForm(state, action) {
+      state.showReviewForm = action.payload
+    },
+    updateRating(state, action) {
+      state.review = action.payload
+      state.showReviewForm = true
+    },
   },
 })
 
@@ -84,5 +105,9 @@ export const {
   clearCart,
   handleLogin,
   handleRegister,
-  getToken,
+  getAuthInfo,
+  saveLocalStorage,
+  removeLocalStorage,
+  showReviewForm,
+  updateRating,
 } = productSlice.actions
