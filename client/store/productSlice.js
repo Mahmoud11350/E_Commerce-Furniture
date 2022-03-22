@@ -62,7 +62,6 @@ const productSlice = createSlice({
       const index = state.cartItems.findIndex(
         (item) => item.productId === action.payload.product.productId
       )
-      console.log(index)
       state.cartItems[index].amount -= 1
     },
     clearCart(state, action) {

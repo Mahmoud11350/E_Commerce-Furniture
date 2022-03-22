@@ -1,9 +1,12 @@
+import { response } from 'express'
 import { Formik, Form, Field } from 'formik'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import api from '../axios/axios'
-import { saveLocalStorage } from '../store/productSlice'
+import { saveLocalStorage, getAuthInfo } from '../store/productSlice'
 function RegisterForm({ inputs, initialValues, btnType }) {
+  const [error, setError] = useState(null)
   const dispatch = useDispatch()
   const handleSubmit = async (values, { resetForm }) => {
     if (btnType === 'login') {
@@ -11,17 +14,20 @@ function RegisterForm({ inputs, initialValues, btnType }) {
         const { data } = await api.post('/auth/login', values)
         const { token, user } = data
         dispatch(saveLocalStorage({ token, user }))
+        dispatch(getAuthInfo({ token, user }))
       } catch (error) {
-        console.log(error.response)
+        setError(error.response.data.msg)
       }
+      resetForm()
     }
     if (btnType === 'register') {
       try {
         const { data } = await api.post('/auth/register', values)
         const { token, user } = data
         dispatch(saveLocalStorage({ token, user }))
+        dispatch(getAuthInfo({ token, user }))
       } catch (error) {
-        console.log(error.response)
+        setError(error.response.data.msg)
       }
     }
     resetForm()
@@ -63,6 +69,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
                 </span>
               </Link>
             </h2>
+            {error && <h2>{error}</h2>}
           </div>
         </Form>
       </Formik>
