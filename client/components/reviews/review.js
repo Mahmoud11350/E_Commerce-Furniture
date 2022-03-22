@@ -11,7 +11,12 @@ function Review({ reviews }) {
       review: state.product.review,
     }
   })
-  const parsedUser = JSON.parse(user)
+
+  let parsedUser = user
+  if (typeof user === 'string') {
+    parsedUser = JSON.parse(user)
+  }
+
   let signedUser = null
   if (parsedUser) {
     signedUser = parsedUser._id

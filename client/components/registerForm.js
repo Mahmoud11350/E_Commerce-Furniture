@@ -33,9 +33,9 @@ function RegisterForm({ inputs, initialValues, btnType }) {
   }
 
   return (
-    <section className=" mx-auto w-96 rounded-xl border-t-8 border-mainDark">
+    <section className=" mx-auto w-96 rounded-xl border border-t-8 border-t-secondary">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className="rounded-lg bg-mainLight py-4 ">
+        <Form className="rounded-lg  py-4 ">
           {inputs.map((input) => {
             return (
               <div className="mx-auto w-3/4">
@@ -47,7 +47,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
                 </label>
                 <Field
                   id={input}
-                  className="mx-auto mt-3 mb-8 block w-full rounded border px-4 py-1 text-lg outline-none"
+                  className="mx-auto mt-3 mb-8 block w-full rounded border bg-secondary/20 px-4 py-1 text-lg outline-none"
                   name={input}
                   type={input}
                 />
@@ -57,7 +57,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
 
           <div className="mx-auto text-center ">
             <button
-              className="rounded bg-mainDark py-2 px-4 text-xl font-bold capitalize text-white transition-colors duration-300 hover:bg-main"
+              className="rounded bg-secondary/80 py-2 px-4 text-xl font-bold capitalize text-mainDark transition-colors duration-300 hover:bg-secondary"
               type="submit"
             >
               {btnType}

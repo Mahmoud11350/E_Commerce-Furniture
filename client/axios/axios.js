@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const isServer = typeof window === 'undefined'
-const token = isServer ? null : window.localStorage.getItem('token')
+// const isServer = typeof window === 'undefined'
+// const token = isServer ? null : window.localStorage.getItem('token')
 
 const api = axios.create({
   baseURL: 'https://e-c-ommerce.herokuapp.com/api/v1',
@@ -10,6 +10,8 @@ const api = axios.create({
 // handle requests
 api.interceptors.request.use(
   (config) => {
+    const isServer = typeof window === 'undefined'
+    const token = isServer ? null : window.localStorage.getItem('token')
     config.headers.common['Authorization'] = `Bearer ${token}`
     return config
   },
