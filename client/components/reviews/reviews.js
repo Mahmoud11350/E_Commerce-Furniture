@@ -10,8 +10,8 @@ function Reviews({ reviews, productId }) {
             <h2>product has no reviews yet</h2>
           </div>
         )}
-        <ReviewForm productId={productId} />
         {reviews.length > 0 && <Review reviews={reviews} />}
+        <ReviewForm productId={productId} />
       </section>
     </>
   )

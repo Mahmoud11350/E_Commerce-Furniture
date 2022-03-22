@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from '../../axios/axios'
 import { updateRating } from '../../store/productSlice'
+import Router from 'next/router'
 
 function Review({ reviews }) {
   const { user, review } = useSelector((state) => {
@@ -19,6 +20,7 @@ function Review({ reviews }) {
   const deleteReview = async (reviewId) => {
     try {
       await axios.delete(`/reviews/${reviewId}`)
+      Router.reload()
     } catch (error) {
       console.log(error)
     }

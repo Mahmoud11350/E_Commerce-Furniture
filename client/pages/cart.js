@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux'
 import OrderCheck from '../components/cart/orderedCheck'
 function Cart() {
   const cartItems = useSelector((state) => state.product.cartItems)
-  const token = useSelector((state) => state.product.token)
-  console.log(token)
   return (
     <>
       {cartItems.length > 0 ? (

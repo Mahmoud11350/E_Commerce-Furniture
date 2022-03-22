@@ -8,7 +8,6 @@ import { showReviewForm, updateRating } from '../../store/productSlice'
 
 function ReviewForm({ productId }) {
   const [error, setError] = useState(null)
-  const [review, setReview] = useState(false)
   const { token, user, reviewValues, ReviewForm } = useSelector((state) => {
     return {
       token: state.product.token,
@@ -17,14 +16,14 @@ function ReviewForm({ productId }) {
       ReviewForm: state.product.showReviewForm,
     }
   })
-  console.log(ReviewForm)
   const dispatch = useDispatch()
-  const inputs = ['rating', 'title', 'comment']
+  const inputs = ['rating', 'title']
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
       await axios.post('/reviews', { ...values, product: productId })
       dispatch(showReviewForm(false))
+      Router.reload()
     } catch (error) {
       setError(error.response.data.msg)
     }
@@ -58,32 +57,37 @@ function ReviewForm({ productId }) {
       )}
 
       {ReviewForm && (
-        <div className=" mx-auto mb-6 w-96  rounded-lg border-t-[6px] border-t-secondary bg-mainLight/20 py-4 px-3">
+        <div className=" mx-auto mb-6 max-w-[500px] rounded-lg border border-t-[6px] border-t-secondary  py-4 px-3">
           <Formik initialValues={reviewValues} onSubmit={handleSubmit}>
             <Form>
-              {inputs.map((input) => {
-                return (
-                  <div>
-                    {/* <label
-                      className="mb-2 block text-lg font-bold capitalize text-mainDark"
-                      htmlFor={input}
-                    >
-                      {input}
-                    </label> */}
-                    <Field
-                      placeholder={input}
-                      className="mb-2 w-full  rounded-lg border-mainDark bg-slate-50 py-1 px-3 text-xl capitalize outline-none"
-                      id={input}
-                      name={input}
-                      type={`${input === 'rating' ? 'number' : 'text'}`}
-                      min={input === 'rating' ? 0 : null}
-                      max={input === 'rating' ? 5 : null}
-                    />
-                  </div>
-                )
-              })}
+              <div className="grid grid-cols-[130px_1fr]">
+                {inputs.map((input) => {
+                  return (
+                    <div>
+                      <Field
+                        placeholder={input}
+                        className={`mb-2 ${
+                          input === 'rating' ? 'w-28' : 'w-full'
+                        } rounded-lg border-mainDark bg-[#eee] py-1 px-3 text-xl capitalize outline-none`}
+                        id={input}
+                        name={input}
+                        type={`${input === 'rating' ? 'number' : 'text'}`}
+                        min={input === 'rating' ? 0 : null}
+                        max={input === 'rating' ? 5 : null}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+
+              <Field
+                as={'textarea'}
+                name="comment"
+                placeholder="comment"
+                className="mb-2 w-full rounded-lg  border-mainDark bg-[#eee]  py-1 px-3 text-xl capitalize outline-none"
+              />
               <button
-                className="mt-5  rounded bg-secondary py-2 px-4 text-lg font-bold text-white transition duration-300 hover:bg-main"
+                className="mt-5  rounded border border-secondary  py-2 px-4 text-lg font-bold transition duration-300 hover:bg-secondary"
                 type="submit"
               >
                 Review

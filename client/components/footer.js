@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="">
+    <div className="text-center">
       &copy; <span>Mahmoud Salah</span> All Right Reserved
     </div>
   )

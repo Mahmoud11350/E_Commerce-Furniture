@@ -7,7 +7,7 @@ function OrderCheck({ cartItems }) {
 
   return (
     <section className="container my-8 capitalize">
-      <div className="w-96 border py-4 px-4 ">
+      <div className=" w-[300px] rounded-lg border py-4 px-4 sm:w-96 ">
         <div className="flex flex-col content-end ">
           <div className="mb-6  flex justify-between">
             <h2 className="text-lg font-bold text-main ">Subtotal:</h2>
@@ -26,7 +26,10 @@ function OrderCheck({ cartItems }) {
             <h2 className="text-lg font-bold text-mainDark">5$</h2>
           </div>
           <div className="mlex bbrder-b  font-m mb-6 flex  justify-between">
-            <h2 className="text-3xl font-bold text-red-600 "> order total :</h2>
+            <h2 className="text-xl font-bold text-red-600 md:text-2xl lg:text-3xl ">
+              {' '}
+              order total :
+            </h2>
             <h2 className="text-2xl font-bold text-red-600">
               {' '}
               {subtotal + 10 + 5} $

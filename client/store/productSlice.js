@@ -91,6 +91,11 @@ const productSlice = createSlice({
       state.review = action.payload
       state.showReviewForm = true
     },
+    deleteCartItem(state, action) {
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.productId !== action.payload
+      })
+    },
   },
 })
 
@@ -110,4 +115,5 @@ export const {
   removeLocalStorage,
   showReviewForm,
   updateRating,
+  deleteCartItem,
 } = productSlice.actions

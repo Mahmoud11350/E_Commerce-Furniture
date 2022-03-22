@@ -7,7 +7,7 @@ function EmptyCart() {
           Your cart is empty
         </h2>
         <Link href={'/products'}>
-          <button className="rounded border bg-mainLight py-2 px-6 font-mono">
+          <button className="rounded border bg-secondary   py-2 px-6 font-mono font-bold capitalize text-white">
             Fill it
           </button>
         </Link>

@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
           <main>
             <Component {...pageProps} />
           </main>
-          <footer className="flex items-center justify-center bg-main text-xl text-white">
+          <footer className="flex items-center justify-center bg-main text-lg text-white md:text-xl">
             <Footer />
           </footer>
         </section>

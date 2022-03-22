@@ -12,7 +12,7 @@ function Navigation() {
         <span className="text-mainDark">home</span> center
       </div>
       <div
-        className={`absolute top-0 right-0 z-10 transition-all duration-[.4s]  ${
+        className={`fixed top-0 right-0 z-10 transition-all duration-[.4s]  ${
           !toggle ? '-translate-x-full md:translate-x-0 ' : 'translate-x-0 '
         }flex h-full  w-full flex-col bg-white md:relative md:w-fit md:bg-transparent`}
       >
