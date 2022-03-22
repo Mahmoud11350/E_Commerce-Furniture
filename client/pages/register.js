@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Register from '../components/registerForm'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 function RegisterForm() {
   const Router = useRouter()
   const { token, user } = useSelector((state) => {
