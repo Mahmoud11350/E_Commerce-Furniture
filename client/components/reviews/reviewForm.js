@@ -22,6 +22,9 @@ function ReviewForm({ productId }) {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       await axios.post('/reviews', { ...values, product: productId })
+      await axios.get(
+        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id=${productId}`
+      )
       dispatch(showReviewForm(false))
       Router.reload()
     } catch (error) {
