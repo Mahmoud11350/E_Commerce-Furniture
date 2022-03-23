@@ -21,9 +21,12 @@ function Review({ reviews }) {
     signedUser = parsedUser._id
   }
 
-  const deleteReview = async (reviewId) => {
+  const deleteReview = async (reviewId, productId) => {
     try {
       await axios.delete(`/reviews/${reviewId}`)
+      await axios.get(
+        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id${productId}`
+      )
       Router.reload()
     } catch (error) {
       console.log(error)
@@ -37,6 +40,7 @@ function Review({ reviews }) {
       console.log(error)
     }
   }
+  console.log(reviews)
 
   return (
     <section className="container">
@@ -65,7 +69,7 @@ function Review({ reviews }) {
                 <div className="flex justify-between ">
                   <button
                     className="rounded-lg bg-red-600 py-2 px-4 font-bold text-white"
-                    onClick={() => deleteReview(review._id)}
+                    onClick={() => deleteReview(review._id, review.product)}
                   >
                     Delete Review
                   </button>
