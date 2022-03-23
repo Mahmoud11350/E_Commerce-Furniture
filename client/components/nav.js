@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setActiveLink } from '../store/productSlice'
 function Navigation() {
-  const [activeLink, setActiveLink] = useState('home')
   const links = ['home', 'about', 'products', 'cart', 'login']
   const [toggle, setToggle] = useState(false)
   const toggleHandler = () => setToggle(!toggle)
-  const token = useSelector((state) => state.product.token)
+  const [activeLink, setActive] = useState()
+  const link = useSelector((state) => state.product.activeLink)
+  useEffect(() => {
+    setActive(link)
+  }, [link])
+
+  const dispatch = useDispatch()
   return (
     <nav className="container flex items-center justify-between py-3">
       <div className="font-sofia text-3xl font-bold uppercase ">
@@ -46,13 +53,14 @@ function Navigation() {
           {links.map((link) => {
             return (
               <li
+                key={link}
                 onClick={toggleHandler}
                 className={`capitalize transition-all duration-[.4s] hover:px-4  hover:font-bold hover:text-secondary md:hover:px-0 md:hover:font-normal 
                 `}
               >
                 <Link href={`/${link === 'home' ? '' : link}`}>
                   <a
-                    onClick={() => setActiveLink(link)}
+                    onClick={() => dispatch(setActiveLink(link))}
                     className={`${
                       activeLink === link
                         ? 'rounded-lg bg-main py-1 px-2 text-white'

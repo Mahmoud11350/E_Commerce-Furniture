@@ -1,18 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 function OurStory() {
-  const H1 = styled.h1`
-    &:after {
-      content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 73px;
-    height: 2px;
-    background-color: var(--main);
-}
-    }
-  `
   return (
     <section className="container grid grid-cols-1 items-center gap-8 py-12 md:grid-cols-2">
       <div>
@@ -43,3 +31,16 @@ function OurStory() {
 }
 
 export default OurStory
+
+const H1 = styled.h1`
+    &:after {
+      content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 73px;
+    height: 2px;
+    background-color: var(--main);
+}
+    }
+  `

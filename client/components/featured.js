@@ -2,30 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 function Featured({ featured }) {
-  const Div = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 96%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 10;
-    border-radius: 8px;
-    opacity: 0;
-    cursor: pointer;
-    transition: opacity 0.4s;
-
-    &:hover {
-      opacity: 1;
-    }
-    div {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-    }
-  `
   return (
     <section className="mt-8 bg-[#eee] pb-8">
       <h2 className="relative py-8 text-center text-4xl font-bold text-main after:absolute after:bottom-[30px] after:left-1/2 after:h-[2px] after:w-24 after:-translate-x-1/2 after:bg-main">
@@ -37,7 +13,7 @@ function Featured({ featured }) {
             <div key={product._id}>
               <Link href={`/product/${product._id}`}>
                 <div className="cursor-pointer">
-                  <div className="relative">
+                  <WrapDiv className="relative">
                     <Div>
                       <div>
                         {' '}
@@ -58,9 +34,9 @@ function Featured({ featured }) {
                       width={1200}
                       height={992}
                       alt={product.name}
-                      className="relative rounded"
+                      className="relative rounded transition-transform duration-300"
                     ></Image>
-                  </div>
+                  </WrapDiv>
 
                   <div className="flex justify-between uppercase">
                     <span className="text-md font-bold text-main">
@@ -79,3 +55,33 @@ function Featured({ featured }) {
 }
 
 export default Featured
+
+const Div = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 96%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  border-radius: 8px;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.4s;
+
+  &:hover {
+    opacity: 1;
+  }
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+`
+const WrapDiv = styled.div`
+  &:hover img {
+    transform: scale(1.3);
+  }
+`

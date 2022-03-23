@@ -37,36 +37,6 @@ function AllProducts({ products }) {
     }
   }, [company])
 
-  const Div = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 98%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 10;
-    border-radius: 4px;
-    opacity: 0;
-    cursor: pointer;
-    transition: opacity 0.4s;
-
-    &:hover {
-      opacity: 1;
-    }
-    div {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-    }
-  `
-  const WrapDiv = styled.div`
-    &:hover img {
-      transform: scale(1.3);
-    }
-  `
-
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
       {products &&
@@ -112,3 +82,32 @@ function AllProducts({ products }) {
 }
 
 export default AllProducts
+const Div = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 98%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  border-radius: 4px;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.4s;
+
+  &:hover {
+    opacity: 1;
+  }
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+`
+const WrapDiv = styled.div`
+  &:hover img {
+    transform: scale(1.3);
+  }
+`

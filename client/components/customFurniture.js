@@ -3,7 +3,7 @@ function CustomFurniture() {
     <section className="bg-mainLight/30 py-12 ">
       <div className="container">
         <div className="mb-6 flex flex-col items-center justify-between md:flex-row">
-          <h3 className="text-2xl md:w-1/2">
+          <h3 className="text-2xl text-mainDark md:w-1/2">
             Custom Furniture Built Only For You
           </h3>
           <p className="md:w-1/2 ">

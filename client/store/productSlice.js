@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { stringify } from 'querystring'
 const isServer = typeof window === 'undefined'
 const token = isServer ? null : window.localStorage.getItem('token')
 const user = isServer ? null : window.localStorage.getItem('user')
-const cartItems = isServer ? null : window.localStorage.getItem('cartItems')
+const cartItems = isServer ? [] : window.localStorage.getItem('cartItems')
+const activeLink = isServer ? null : window.localStorage.getItem('activeLink')
 const initialState = {
   products: {
     name: '',
@@ -11,7 +13,7 @@ const initialState = {
     color: '',
     freeShipping: '',
   },
-  cartItems: [],
+  cartItems: cartItems || [],
   ui: null,
   token,
   user,
@@ -21,6 +23,7 @@ const initialState = {
     comment: '',
   },
   showReviewForm: false,
+  activeLink,
 }
 
 const productSlice = createSlice({
@@ -42,6 +45,10 @@ const productSlice = createSlice({
     },
     addToCart(state, action) {
       const newItem = action.payload.productOrder
+      let cartItems = state.cartItems
+      if (typeof cartItems === 'string') {
+        state.cartItems = JSON.parse(cartItems)
+      }
       const index = state.cartItems.findIndex(
         (element) => element.productId === newItem.productId
       )
@@ -52,6 +59,7 @@ const productSlice = createSlice({
       } else {
         state.cartItems[index].amount += 1
       }
+      window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     plusAmount(state, action) {
       const index = state.cartItems.findIndex(
@@ -92,9 +100,17 @@ const productSlice = createSlice({
       state.showReviewForm = true
     },
     deleteCartItem(state, action) {
+      if (typeof state.cartItems === 'string') {
+        state.cartItems = JSON.parse(state.cartItems)
+      }
       state.cartItems = state.cartItems.filter((item) => {
         return item.productId !== action.payload
       })
+      window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+    },
+    setActiveLink(state, action) {
+      state.activeLink = action.payload
+      window.localStorage.setItem('activeLink', action.payload)
     },
   },
 })
@@ -116,4 +132,5 @@ export const {
   showReviewForm,
   updateRating,
   deleteCartItem,
+  setActiveLink,
 } = productSlice.actions

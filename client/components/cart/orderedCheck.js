@@ -1,9 +1,11 @@
 function OrderCheck({ cartItems }) {
-  const subtotal = cartItems
-    .map((acc) => {
-      return acc.amount * acc.price
-    })
-    .reduce((acc, current) => acc + current)
+  const subtotal =
+    typeof cartItems !== 'string' &&
+    cartItems
+      ?.map((acc) => {
+        return acc.amount * acc.price
+      })
+      .reduce((acc, current) => acc + current)
 
   return (
     <section className="container my-8 capitalize">

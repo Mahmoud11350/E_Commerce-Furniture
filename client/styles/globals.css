@@ -3,14 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    font-family: 'Cairo', sans-serif;
-    font-family: 'Sofia', cursive;
-    font-family: 'Work Sans', sans-serif;
-  }
-}
-
 :root {
   --main: #2196f3;
 }

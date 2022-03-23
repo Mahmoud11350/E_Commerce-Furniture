@@ -38,7 +38,7 @@ function RegisterForm({ inputs, initialValues, btnType }) {
         <Form className="rounded-lg  py-4 ">
           {inputs.map((input) => {
             return (
-              <div className="mx-auto w-3/4">
+              <div className="mx-auto w-3/4" key={input}>
                 <label
                   className="mx-auto block  text-lg capitalize"
                   htmlFor={input}

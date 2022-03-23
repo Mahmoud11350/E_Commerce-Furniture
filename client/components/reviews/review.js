@@ -47,6 +47,7 @@ function Review({ reviews }) {
               <span className="flex text-3xl font-bold text-yellow-400">
                 {[...Array(review.rating)].map((span) => (
                   <svg
+                    key={Math.random()}
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
                     viewBox="0 0 20 20"

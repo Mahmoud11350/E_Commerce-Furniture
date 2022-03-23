@@ -48,7 +48,7 @@ function productsSidebar() {
                   </Field>
                   {category.map((item) => {
                     return (
-                      <div key="item">
+                      <div key={item}>
                         <Field
                           id={item}
                           name="category"

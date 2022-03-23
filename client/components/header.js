@@ -1,22 +1,17 @@
 import Image from 'next/image'
 import styled from 'styled-components'
-function Header() {
-  const Div = styled.div`
-    position: relative;
+import Router from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setActiveLink } from '../store/productSlice'
 
-    &:after {
-     content: '';
-    right: -23px;
-    position: absolute;
-    top: 50%;
-    height: 113%;
-    width: 50px;
-    background-color: var(--main);
-    transform: translateY(-50%);
-    z-index: -1;
-}
-    }
-  `
+function Header() {
+  const dispatch = useDispatch()
+
+  const handleShopNow = () => {
+    Router.replace('/products')
+    dispatch(setActiveLink('products'))
+  }
+
   return (
     <section className="container grid items-center gap-5 pt-12 md:grid-cols-2">
       <div>
@@ -29,7 +24,10 @@ function Header() {
           aperiam odio ducimus, obcaecati libero et quia tempora excepturi quis
           alias?
         </p>
-        <button className=" rounded border-2 border-main py-2 px-6 text-lg transition-colors duration-300 hover:bg-main hover:text-white">
+        <button
+          onClick={handleShopNow}
+          className=" rounded border-2 border-main py-2 px-6 text-lg transition-colors duration-300 hover:bg-main hover:text-white"
+        >
           Shop Now
         </button>
       </div>
@@ -49,3 +47,20 @@ function Header() {
 }
 
 export default Header
+
+const Div = styled.div`
+    position: relative;
+
+    &:after {
+     content: '';
+    right: -23px;
+    position: absolute;
+    top: 50%;
+    height: 113%;
+    width: 50px;
+    background-color: var(--main);
+    transform: translateY(-50%);
+    z-index: -1;
+}
+    }
+  `

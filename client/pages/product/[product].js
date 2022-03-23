@@ -73,6 +73,7 @@ function Product({ product }) {
               <span className=" flex items-center text-2xl font-bold text-yellow-400">
                 {[...Array(product.averageRating)].map((svg) => (
                   <svg
+                    key={Math.random()}
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
                     viewBox="0 0 20 20"
@@ -109,6 +110,7 @@ function Product({ product }) {
                 {colors.map((color) => {
                   return (
                     <li
+                      key={color}
                       className="h-8 w-8 rounded-full"
                       style={{ backgroundColor: color }}
                     ></li>
