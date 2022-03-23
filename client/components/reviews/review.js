@@ -25,7 +25,7 @@ function Review({ reviews }) {
     try {
       await axios.delete(`/reviews/${reviewId}`)
       await axios.get(
-        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id${productId}`
+        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id=${productId}`
       )
       Router.reload()
     } catch (error) {
