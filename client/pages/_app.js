@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../build.css'
 import Head from 'next/head'
 import Navigation from '../components/nav'
 import Footer from '../components/footer'
@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
         <title>Home Center</title>
       </Head>
       <Provider store={store}>
-        <section className="grid min-h-screen grid-rows-[100px_1fr_50px] font-mono">
+        <section className="grid min-h-screen grid-rows-[100px_1fr_50px] ">
           <header className="">
             <Navigation />
           </header>

@@ -17,6 +17,8 @@ function AllProducts({ products }) {
     } else {
       setFilterProducts([...products])
     }
+  }, [name])
+  useEffect(() => {
     if (category && category !== 'all') {
       setFilterProducts((oldState) =>
         oldState.filter((product) => product.category === category)
@@ -24,25 +26,26 @@ function AllProducts({ products }) {
     } else if (category === 'all') {
       setFilterProducts([...products])
     }
+  }, [category])
+  useEffect(() => {
     if (company && company !== 'all') {
-      console.log('company')
-
       setFilterProducts((oldState) =>
         oldState.filter((product) => product.company === company)
       )
     } else if (company === 'all') {
       setFilterProducts([...products])
     }
-  }, [filter])
+  }, [company])
+
   const Div = styled.div`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 96%;
+    height: 98%;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 10;
-    border-radius: 8px;
+    border-radius: 4px;
     opacity: 0;
     cursor: pointer;
     transition: opacity 0.4s;
@@ -58,13 +61,19 @@ function AllProducts({ products }) {
       color: white;
     }
   `
+  const WrapDiv = styled.div`
+    &:hover img {
+      transform: scale(1.3);
+    }
+  `
+
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
       {products &&
         filteredProducts.map((product) => {
           return (
-            <div key={product._id} className="relative">
-              <div className="relative">
+            <WrapDiv key={product._id} className="relative">
+              <div className=" relative">
                 <Link href={`/product/${product._id}`}>
                   <Div>
                     <div>
@@ -81,19 +90,21 @@ function AllProducts({ products }) {
                     </div>
                   </Div>
                 </Link>
-                <Image
-                  src={product.image}
-                  width={1200}
-                  height={992}
-                  alt={product.name}
-                  className="relative rounded"
-                />
+                <div className="">
+                  <Image
+                    src={product.image}
+                    width={1200}
+                    height={992}
+                    alt={product.name}
+                    className="scale-200 relative rounded transition-transform duration-300"
+                  />
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <h2 className="text-lg capitalize">{product.name}</h2>
                 <p className="text-main">$ {product.price}</p>
               </div>
-            </div>
+            </WrapDiv>
           )
         })}
     </div>

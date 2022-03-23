@@ -4,6 +4,8 @@ module.exports = {
   images: {
     domains: ['dl.airtable.com'],
   },
+  optimizeFonts: false,
+
   async rewrites() {
     return [
       {

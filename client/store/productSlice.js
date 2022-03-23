@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const isServer = typeof window === 'undefined'
 const token = isServer ? null : window.localStorage.getItem('token')
 const user = isServer ? null : window.localStorage.getItem('user')
+const cartItems = isServer ? null : window.localStorage.getItem('cartItems')
 const initialState = {
   products: {
     name: '',
