@@ -5,6 +5,7 @@ import Router from 'next/router'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { showReviewForm, updateRating } from '../../store/productSlice'
+import Axios from 'axios'
 
 function ReviewForm({ productId }) {
   const [error, setError] = useState(null)
@@ -22,11 +23,9 @@ function ReviewForm({ productId }) {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       await axios.post('/reviews', { ...values, product: productId })
-      await axios.get(
-        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id=${productId}`
-      )
-      dispatch(showReviewForm(false))
+      await Axios.get(`/api/revalidate?id=${productId}`)
       Router.reload()
+      dispatch(showReviewForm(false))
     } catch (error) {
       setError(error.response.data.msg)
     }

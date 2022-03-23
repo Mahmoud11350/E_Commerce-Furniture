@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import axios from '../../axios/axios'
+import Axios from 'axios'
 import { updateRating } from '../../store/productSlice'
 import Router from 'next/router'
 
@@ -24,9 +25,7 @@ function Review({ reviews }) {
   const deleteReview = async (reviewId, productId) => {
     try {
       await axios.delete(`/reviews/${reviewId}`)
-      await axios.get(
-        `https://e-commerce-alpha-green.vercel.app/api/revalidate?id=${productId}`
-      )
+      await Axios.get(`/api/revalidate?id=${productId}`)
       Router.reload()
     } catch (error) {
       console.log(error)
@@ -47,7 +46,10 @@ function Review({ reviews }) {
       <div className="mb-7 grid cursor-pointer grid-cols-1  md:grid-cols-3">
         {reviews.map((review) => {
           return (
-            <div className="rounded-xl  border  border-mainLight p-5 shadow-xl transition-transform duration-300 hover:-translate-y-2">
+            <div
+              key={review._id}
+              className="rounded-xl  border  border-mainLight p-5 shadow-xl transition-transform duration-300 hover:-translate-y-2"
+            >
               <span className="flex text-3xl font-bold text-yellow-400">
                 {[...Array(review.rating)].map((span) => (
                   <svg
