@@ -49,7 +49,7 @@ function productsSidebar() {
                 <ul className="flex flex-wrap space-x-3 sm:space-x-0 md:flex-col">
                   <Field
                     as="select"
-                    name="company"
+                    name="category"
                     className="relative w-5/6 border border-main bg-transparent py-1 px-2  capitalize md:hidden"
                   >
                     {category.map((item) => {
