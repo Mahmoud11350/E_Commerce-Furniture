@@ -8,34 +8,33 @@ import { useEffect } from 'react'
 function AllProducts({ products }) {
   const [filteredProducts, setFilterProducts] = useState([...products])
   const filter = useSelector((state) => state.product.products)
-  const { name, category, color, company } = filter
+  const { name, category, color, company, freeShipping } = filter
+  let newProducts = []
   useEffect(() => {
-    if (name) {
-      setFilterProducts((oldState) =>
-        oldState.filter((product) => product.name.startsWith(name))
-      )
-    } else {
-      setFilterProducts([...products])
-    }
-  }, [name])
-  useEffect(() => {
-    if (category && category !== 'all') {
-      setFilterProducts((oldState) =>
-        oldState.filter((product) => product.category === category)
-      )
-    } else if (category === 'all') {
-      setFilterProducts([...products])
-    }
-  }, [category])
-  useEffect(() => {
-    if (company && company !== 'all') {
-      setFilterProducts((oldState) =>
-        oldState.filter((product) => product.company === company)
-      )
-    } else if (company === 'all') {
-      setFilterProducts([...products])
-    }
-  }, [company])
+    newProducts = products
+      .filter((product) => {
+        return name === '' ? product : product.name.startsWith(name)
+      })
+      .filter((product) => {
+        return category === 'all' ? product : product.category === category
+      })
+      .filter((product) => {
+        return company === 'all' ? product : product.company === company
+      })
+      .filter((product) => {
+        return color === 'allColor' ? product : product.colors.includes(color)
+      })
+      .filter((product) => {
+        return freeShipping === ''
+          ? product
+          : freeShipping === false
+          ? product
+          : product.shipping === freeShipping
+      })
+
+    setFilterProducts(newProducts)
+  }, [filter])
+  console.log(filter)
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">

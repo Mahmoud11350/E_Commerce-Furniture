@@ -2,22 +2,40 @@ import { Field, Form, Formik } from 'formik'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { getProducts } from '../../store/productSlice'
+import { getProducts, clearFilters } from '../../store/productSlice'
 
 function productsSidebar() {
-  const [activeClass, setActiveClass] = useState('all')
+  const [activeCompany, setactiveCompany] = useState('all')
+  const [activeColor, setActiveColor] = useState('allColor')
   const dispatch = useDispatch()
   const products = useSelector((state) => state.product.products)
   const category = ['all', 'office', 'kitchen', 'bedroom']
   const company = ['all', 'liddy', 'marcos', 'ikea', 'caressa']
-  const colors = ['#ffb900', '#ff0000', '#00ff00', '#0000ff', '#000']
+  const colors = [
+    'allColor',
+    '#ffb900',
+    '#ff0000',
+    '#00ff00',
+    '#0000ff',
+    '#000',
+  ]
   const handleSubmit = (values) => {
     dispatch(getProducts({ values }))
+  }
+  const handleRemoveFilters = (values, { resetForm }) => {
+    dispatch(clearFilters())
+    setactiveCompany('all')
+    setActiveColor('allColor')
+    resetForm()
   }
   return (
     <>
       <div className="md:sticky md:top-10 md:h-screen ">
-        <Formik initialValues={products} validate={handleSubmit}>
+        <Formik
+          initialValues={products}
+          validate={handleSubmit}
+          onSubmit={handleRemoveFilters}
+        >
           <Form>
             <div>
               <Field
@@ -59,11 +77,11 @@ function productsSidebar() {
                         <label
                           htmlFor={item}
                           className={`mb-2 hidden h-fit cursor-pointer  rounded border border-main py-1 px-2 text-center capitalize hover:bg-secondary hover:text-white md:block md:w-5/6 ${
-                            activeClass === item
+                            activeCompany === item
                               ? 'bg-secondary text-white'
                               : ''
                           }`}
-                          onClick={() => setActiveClass(item)}
+                          onClick={() => setactiveCompany(item)}
                         >
                           {item}
                         </label>
@@ -95,10 +113,21 @@ function productsSidebar() {
                     return (
                       <div key={color}>
                         <label
+                          onClick={() => setActiveColor(color)}
                           htmlFor={color}
                           style={{ backgroundColor: color }}
-                          className={`inline-block h-6 w-6 cursor-pointer rounded-full`}
-                        ></label>
+                          className={`${
+                            color === 'allColor'
+                              ? ' cursor-pointer rounded-lg py-1 px-2'
+                              : 'flex h-6 w-6 cursor-pointer items-center rounded-full'
+                          }    ${
+                            activeColor === color
+                              ? ' h-7 w-7 border-4 border-main'
+                              : ''
+                          }`}
+                        >
+                          {color === 'allColor' && 'ALL'}
+                        </label>
                         <Field
                           id={color}
                           value={color}
@@ -120,6 +149,12 @@ function productsSidebar() {
                 </label>
               </div>
             </div>
+            <button
+              type="submit"
+              className="mt-5 rounded-lg bg-red-500 py-2 px-4 text-white transition-all duration-300 hover:bg-red-700 active:-translate-y-3"
+            >
+              Clear Fillters
+            </button>
           </Form>
         </Formik>
       </div>

@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { setActiveLink } from '../store/productSlice'
+
 function Featured({ featured }) {
+  const dispatch = useDispatch()
   return (
     <section className="mt-8 bg-[#eee] pb-8">
       <h2 className="relative py-8 text-center text-4xl font-bold text-main after:absolute after:bottom-[30px] after:left-1/2 after:h-[2px] after:w-24 after:-translate-x-1/2 after:bg-main">
@@ -10,7 +14,10 @@ function Featured({ featured }) {
       <div className="container mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
         {featured.map((product) => {
           return (
-            <div key={product._id}>
+            <div
+              key={product._id}
+              onClick={() => dispatch(setActiveLink('products'))}
+            >
               <Link href={`/product/${product._id}`}>
                 <div className="cursor-pointer">
                   <WrapDiv className="relative">

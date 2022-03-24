@@ -1,4 +1,4 @@
-import '../build.css'
+import '../styles/global.css'
 import Head from 'next/head'
 import Navigation from '../components/nav'
 import Footer from '../components/footer'
@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Home Center</title>
+        <title>Furniture</title>
       </Head>
       <Provider store={store}>
         {loading && <Spinner />}

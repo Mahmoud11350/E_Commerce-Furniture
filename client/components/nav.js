@@ -9,7 +9,17 @@ function Navigation() {
   const [toggle, setToggle] = useState(false)
   const toggleHandler = () => setToggle(!toggle)
   const [activeLink, setActive] = useState()
-  const link = useSelector((state) => state.product.activeLink)
+  let { link, token, user } = useSelector((state) => {
+    return {
+      link: state.product.activeLink,
+      token: state.product.token,
+      user: state.product.user,
+    }
+  })
+  if (user && typeof user === 'string') {
+    user = JSON.parse(user)
+  }
+
   useEffect(() => {
     setActive(link)
   }, [link])
@@ -65,9 +75,13 @@ function Navigation() {
                       activeLink === link
                         ? 'rounded-lg bg-main py-1 px-2 text-white'
                         : ''
-                    }`}
+                    }
+                    
+                   `}
                   >
-                    {link}
+                    {link === 'login' && user && typeof user !== 'string'
+                      ? `${user.name}`
+                      : link}
                   </a>
                 </Link>
               </li>

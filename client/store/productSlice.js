@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { stringify } from 'querystring'
 const isServer = typeof window === 'undefined'
 const token = isServer ? null : window.localStorage.getItem('token')
 const user = isServer ? null : window.localStorage.getItem('user')
@@ -8,9 +7,9 @@ const activeLink = isServer ? null : window.localStorage.getItem('activeLink')
 const initialState = {
   products: {
     name: '',
-    category: '',
-    company: '',
-    color: '',
+    category: 'all',
+    company: 'all',
+    color: 'allColor',
     freeShipping: '',
   },
   cartItems: cartItems || [],
@@ -23,7 +22,7 @@ const initialState = {
     comment: '',
   },
   showReviewForm: false,
-  activeLink,
+  activeLink: activeLink || 'home',
 }
 
 const productSlice = createSlice({
@@ -62,19 +61,34 @@ const productSlice = createSlice({
       window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     plusAmount(state, action) {
+      let cartItems = state.cartItems
+      if (typeof cartItems === 'string') {
+        state.cartItems = JSON.parse(cartItems)
+      }
       const index = state.cartItems.findIndex(
         (item) => item.productId === action.payload.product.productId
       )
-      state.cartItems[index].amount += 1
+      if (state.cartItems[index].amount < 5) {
+        state.cartItems[index].amount += 1
+      }
     },
     minusAmount(state, action) {
+      let cartItems = state.cartItems
+      if (typeof cartItems === 'string') {
+        state.cartItems = JSON.parse(cartItems)
+      }
       const index = state.cartItems.findIndex(
         (item) => item.productId === action.payload.product.productId
       )
-      state.cartItems[index].amount -= 1
+      if (state.cartItems[index].amount > 1) {
+        state.cartItems[index].amount -= 1
+      }
     },
     clearCart(state, action) {
       state.cartItems = []
+    },
+    convertJsonCart(state, action) {
+      state.cartItems = JSON.parse(state.cartItems)
     },
     getAuthInfo(state, action) {
       state.token = action.payload.token
@@ -112,6 +126,15 @@ const productSlice = createSlice({
       state.activeLink = action.payload
       window.localStorage.setItem('activeLink', action.payload)
     },
+    clearFilters(state, action) {
+      state.products = {
+        name: '',
+        category: 'all',
+        company: 'all',
+        color: 'allColor',
+        freeShipping: false,
+      }
+    },
   },
 })
 
@@ -133,4 +156,6 @@ export const {
   updateRating,
   deleteCartItem,
   setActiveLink,
+  clearFilters,
+  convertJsonCart,
 } = productSlice.actions
