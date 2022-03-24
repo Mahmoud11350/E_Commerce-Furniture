@@ -76,6 +76,13 @@ function AllProducts({ products }) {
             </WrapDiv>
           )
         })}
+      <div>
+        {filteredProducts.length === 0 && (
+          <h2 className="text-center text-lg font-bold capitalize text-mainDark">
+            sorry , your filters doesn't match any products
+          </h2>
+        )}
+      </div>
     </div>
   )
 }
