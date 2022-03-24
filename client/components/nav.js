@@ -8,10 +8,8 @@ function Navigation() {
   const [toggle, setToggle] = useState(false)
   const router = useRouter()
   const toggleHandler = () => setToggle(!toggle)
-  let { link, token, user } = useSelector((state) => {
+  let { user } = useSelector((state) => {
     return {
-      link: state.product.activeLink,
-      token: state.product.token,
       user: state.product.user,
     }
   })
