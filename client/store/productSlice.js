@@ -22,7 +22,6 @@ const initialState = {
     comment: '',
   },
   showReviewForm: false,
-  activeLink: activeLink || 'home',
 }
 
 const productSlice = createSlice({
@@ -122,10 +121,7 @@ const productSlice = createSlice({
       })
       window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
-    setActiveLink(state, action) {
-      state.activeLink = action.payload
-      window.localStorage.setItem('activeLink', action.payload)
-    },
+
     clearFilters(state, action) {
       state.products = {
         name: '',
@@ -155,7 +151,6 @@ export const {
   showReviewForm,
   updateRating,
   deleteCartItem,
-  setActiveLink,
   clearFilters,
   convertJsonCart,
 } = productSlice.actions

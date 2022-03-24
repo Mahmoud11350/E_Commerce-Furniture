@@ -1,11 +1,8 @@
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import Router from 'next/router'
-import { setActiveLink } from '../store/productSlice'
 function Error({ statusCode }) {
-  const dispatch = useDispatch()
   const backHome = () => {
-    dispatch(setActiveLink('home'))
     Router.replace('/')
   }
   return (

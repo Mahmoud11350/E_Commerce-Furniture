@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { setActiveLink } from '../store/productSlice'
+import { useRouter } from 'next/router'
 function Navigation() {
   const links = ['home', 'about', 'products', 'cart', 'login']
   const [toggle, setToggle] = useState(false)
+  const router = useRouter()
   const toggleHandler = () => setToggle(!toggle)
-  const [activeLink, setActive] = useState()
   let { link, token, user } = useSelector((state) => {
     return {
       link: state.product.activeLink,
@@ -20,11 +19,6 @@ function Navigation() {
     user = JSON.parse(user)
   }
 
-  useEffect(() => {
-    setActive(link)
-  }, [link])
-
-  const dispatch = useDispatch()
   return (
     <nav className="container flex items-center justify-between py-3">
       <div className="font-sofia text-3xl font-bold uppercase ">
@@ -70,9 +64,13 @@ function Navigation() {
               >
                 <Link href={`/${link === 'home' ? '' : link}`}>
                   <a
-                    onClick={() => dispatch(setActiveLink(link))}
                     className={`${
-                      activeLink === link
+                      router.pathname === `/${link}`
+                        ? 'rounded-lg bg-main py-1 px-2 text-white'
+                        : ''
+                    }
+                    ${
+                      router.pathname === `/` && link === 'home'
                         ? 'rounded-lg bg-main py-1 px-2 text-white'
                         : ''
                     }

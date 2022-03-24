@@ -1,15 +1,10 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 import Router from 'next/router'
-import { useDispatch } from 'react-redux'
-import { setActiveLink } from '../store/productSlice'
 
 function Header() {
-  const dispatch = useDispatch()
-
   const handleShopNow = () => {
     Router.replace('/products')
-    dispatch(setActiveLink('products'))
   }
 
   return (

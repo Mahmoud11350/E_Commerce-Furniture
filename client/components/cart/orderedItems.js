@@ -5,7 +5,6 @@ import {
   minusAmount,
   clearCart,
   deleteCartItem,
-  setActiveLink,
 } from '../../store/productSlice'
 import { useRouter } from 'next/router'
 function OrderedItems({ cartItems }) {
@@ -13,7 +12,6 @@ function OrderedItems({ cartItems }) {
   const dispatch = useDispatch()
   const continueShoping = () => {
     router.replace('/products')
-    dispatch(setActiveLink('products'))
   }
   return (
     <section className="container mt-8">
