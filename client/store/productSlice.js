@@ -55,8 +55,12 @@ const productSlice = createSlice({
           ...newItem,
         })
       } else {
-        state.cartItems[index].amount += 1
+        state.cartItems[index].amount =
+          state.cartItems[index].amount === 5
+            ? 5
+            : action.payload.productOrder.amount
       }
+
       window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     plusAmount(state, action) {

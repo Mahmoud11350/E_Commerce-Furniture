@@ -2,7 +2,7 @@ import axios from '../../axios/axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
-import { addToCart, setActiveLink } from '../../store/productSlice'
+import { addToCart } from '../../store/productSlice'
 import { useRouter } from 'next/router'
 import Reviews from '../../components/reviews/reviews'
 import { useState } from 'react'
@@ -30,7 +30,6 @@ function Product({ product }) {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ productOrder }))
-    dispatch(setActiveLink('cart'))
     router.replace('/cart')
   }
   const handlePlusAmount = () => {
