@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://e-c-ommerce.herokuapp.com/api/v1',
+  baseURL: 'https://furniture-3n49.onrender.com/api/v1',
 })
 
 // handle requests
