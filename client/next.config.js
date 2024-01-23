@@ -2,7 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['dl.airtable.com'],
+    domains: ['www.course-api.com'],
   },
   compiler: {
     styledComponents: true,
